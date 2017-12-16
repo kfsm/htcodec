@@ -1,0 +1,17 @@
+{application, htcodec,
+   [
+      {description, "http content-type encoder/decoder"},
+      {vsn,         "0.0.0"},
+      {modules,     []},
+      {registered,  []},
+      {applications,[
+         kernel
+        ,stdlib
+        ,jsx
+        ,feta
+        ,datum
+      ]},
+      {env, []}
+   ]
+}.  
+
