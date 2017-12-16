@@ -1,0 +1,14 @@
+{"1.1.0",
+[{<<"datum">>,
+  {git,"https://github.com/fogfish/datum",
+       {ref,"c02875e5dd0982b355fbec4ae2d249c3f66ee328"}},
+  0},
+ {<<"feta">>,
+  {git,"https://github.com/fogfish/feta",
+       {ref,"07bb63115de4f2369f54bacc8e7ff10b8f79cc41"}},
+  0},
+ {<<"jsx">>,{pkg,<<"jsx">>,<<"2.8.2">>},0}]}.
+[
+{pkg_hash,[
+ {<<"jsx">>, <<"7ACC7D785B5ABE8A6E9ADBDE926A24E481F29956DD8B4DF49E3E4E7BCC92A018">>}]}
+].
