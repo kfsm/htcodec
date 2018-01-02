@@ -43,11 +43,11 @@ encode(Type, _) ->
 %% decode content type
 -spec decode(content_type(), content()) -> datum:either(_).
 
-decode(<<"application/json">>, Json) ->
+decode(<<"application/json", _/binary>>, Json) ->
    as_json(Json);
-decode(<<"application/x-www-form-urlencoded">>, Form) ->
+decode(<<"application/x-www-form-urlencoded", _/binary>>, Form) ->
    as_www_form(Form);
-decode(<<"text/plain">>, Text) ->
+decode(<<"text/plain", _/binary>>, Text) ->
    as_text(Text);
 decode(Type, _) ->
    {error, {unsupported, Type}}.
