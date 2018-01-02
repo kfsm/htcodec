@@ -9,7 +9,8 @@
 
 -export([
    encode/2,
-   decode/2, 
+   decode/2,
+   decode/1,
    to_json/1, 
    as_json/1,
    to_www_form/1, 
@@ -50,6 +51,14 @@ decode(<<"text/plain">>, Text) ->
    as_text(Text);
 decode(Type, _) ->
    {error, {unsupported, Type}}.
+
+%%
+%% decode content type
+-spec decode(_) -> datum:either(_).
+
+decode([{_Code, _Text, Head} | Payload]) ->
+   decode(lens:get(lens:pair(<<"Content-Type">>), Head), scalar:s(Payload)).
+
 
 
 %%

@@ -8,7 +8,8 @@
    encode_text/1,
    decode_text/1,
    encode_www_form/1,
-   decode_www_form/1
+   decode_www_form/1,
+   decode_http_stream/1
 ]).
 
 all() ->
@@ -18,7 +19,8 @@ all() ->
       encode_text,
       decode_text,
       encode_www_form,
-      decode_www_form
+      decode_www_form,
+      decode_http_stream
    ].
 
 %%
@@ -43,4 +45,11 @@ encode_www_form(_) ->
 
 decode_www_form(_) ->
    {ok, #{<<"a">> := <<"1">>, <<"b">> := <<"text">>}} = htcodec:decode(<<"application/x-www-form-urlencoded">>, <<"a=1&b=text">>).
+
+
+%%
+decode_http_stream(_) ->
+   {ok, #{<<"a">> := 1, <<"b">> := <<"text">>}} = htcodec:decode([{200, <<"OK">>, [{<<"Content-Type">>, <<"application/json">>}]}, <<"{\"a\":1,\"b\":\"text\"}">>]).
+
+
 
