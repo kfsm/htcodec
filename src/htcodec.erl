@@ -9,7 +9,8 @@
 
 -export([
    encode/2,
-   decode/2, 
+   decode/2,
+   decode/1,
    to_json/1, 
    as_json/1,
    to_www_form/1, 
@@ -42,14 +43,22 @@ encode(Type, _) ->
 %% decode content type
 -spec decode(content_type(), content()) -> datum:either(_).
 
-decode(<<"application/json">>, Json) ->
+decode(<<"application/json", _/binary>>, Json) ->
    as_json(Json);
-decode(<<"application/x-www-form-urlencoded">>, Form) ->
+decode(<<"application/x-www-form-urlencoded", _/binary>>, Form) ->
    as_www_form(Form);
-decode(<<"text/plain">>, Text) ->
+decode(<<"text/plain", _/binary>>, Text) ->
    as_text(Text);
 decode(Type, _) ->
    {error, {unsupported, Type}}.
+
+%%
+%% decode content type
+-spec decode(_) -> datum:either(_).
+
+decode([{_Code, _Text, Head} | Payload]) ->
+   decode(lens:get(lens:pair(<<"Content-Type">>), Head), scalar:s(Payload)).
+
 
 
 %%
