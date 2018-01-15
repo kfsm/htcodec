@@ -96,7 +96,7 @@ to_www_form(Form) ->
          lists:map(fun to_pair/1, _),
          scalar:s(lists:join(<<$&>>, _))
       ]}
-   catch E:R ->
+   catch _:_ ->
       {error, badarg}
    end.
 
