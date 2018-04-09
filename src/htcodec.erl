@@ -35,8 +35,8 @@ encode(<<"application/x-www-form-urlencoded">>, Form) ->
    to_www_form(Form);
 encode(<<"text/plain">>, Text) ->
    to_text(Text);
-encode(Type, _) ->
-   {error, {unsupported, Type}}.
+encode(_, Binary) ->
+   {ok, Binary}.
 
 
 %%
@@ -49,8 +49,8 @@ decode(<<"application/x-www-form-urlencoded", _/binary>>, Form) ->
    as_www_form(Form);
 decode(<<"text/plain", _/binary>>, Text) ->
    as_text(Text);
-decode(Type, _) ->
-   {error, {unsupported, Type}}.
+decode(_, Binary) ->
+   {ok, Binary}.
 
 %%
 %% decode content type
